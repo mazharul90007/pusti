@@ -1,6 +1,10 @@
+import { AddMeal } from "@/storage/meals";
 import { colors, globalStyles } from "@/styles/global";
+import * as Haptics from "expo-haptics";
+import { router } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -11,9 +15,30 @@ import {
 export default function AddMealScreen() {
   const [name, setName] = useState("");
   const [calories, setCalories] = useState("");
-  const [protin, setProtin] = useState("");
+  const [protein, setProtein] = useState("");
   const [carbs, setCarbs] = useState("");
   const [fat, setFat] = useState("");
+
+  const handleAddMeal = async () => {
+    if (!name || !calories) {
+      Alert.alert("Error", "Please enter a meal name and calories.");
+      return;
+    }
+
+    await AddMeal({
+      name,
+      calories: Number(calories) || 0,
+      protein: Number(protein) || 0,
+      carbs: Number(carbs) || 0,
+      fat: Number(fat) || 0,
+    });
+
+    (setName(""), setCalories(""), setProtein(""), setCarbs(""), setFat(""));
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    Alert.alert("Success", "Meal added successfully");
+
+    router.push("/");
+  };
   return (
     <View style={globalStyles.container}>
       <Text style={globalStyles.title}>Add Meal</Text>
@@ -39,8 +64,8 @@ export default function AddMealScreen() {
           placeholder="Protin (g)"
           placeholderTextColor={colors.textSecondary}
           keyboardType="numeric"
-          value={protin}
-          onChangeText={setProtin}
+          value={protein}
+          onChangeText={setProtein}
         />
         <TextInput
           style={[styles.input, styles.rowInput]}
@@ -60,7 +85,7 @@ export default function AddMealScreen() {
         />
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleAddMeal}>
         <Text style={styles.buttonText}>Add Meal</Text>
       </TouchableOpacity>
     </View>
