@@ -1,3 +1,4 @@
+import CopyButton from "@/components/CopyButton";
 import HomeHeader from "@/components/HomeHeader";
 import PustiGrid from "@/components/PustiGrid";
 import RecentMeals from "@/components/RecentMeals";
@@ -27,6 +28,7 @@ export default function HomeScreen() {
       <Text style={globalStyles.title}>PUSTI</Text>
       <HomeHeader />
       <View style={styles.shareButtonContainer}>
+        <CopyButton meals={meals} />
         <ShareButton meals={meals} />
       </View>
       <PustiGrid meals={meals} />
@@ -37,7 +39,10 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   shareButtonContainer: {
-    alignItems: "flex-end",
+    flexDirection: "row",
+    gap: 12,
     marginBottom: 14,
+    justifyContent: "flex-end",
+    alignItems: "baseline",
   },
 });
