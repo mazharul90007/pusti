@@ -13,7 +13,7 @@ export default function RecentMeals({ meals, onDelete }: RecentMealsProp) {
     <View style={{ marginTop: 30 }}>
       <Text style={globalStyles.sectionTitle}>Recent Meals</Text>
       {meals.length === 0 ? (
-        <Text style={globalStyles.empty}>No meals logged yet</Text>
+        <Text style={globalStyles.empty}>No meal logged yet</Text>
       ) : (
         meals
           .slice(0, 5)
