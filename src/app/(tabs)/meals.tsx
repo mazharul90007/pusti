@@ -31,7 +31,7 @@ export default function MealsScreen() {
   );
   return (
     <ScrollView style={globalStyles.container}>
-      <Text style={globalStyles.title}>All Meals</Text>
+      <Text style={globalStyles.title}>All Meal Items</Text>
       <TouchableOpacity onPress={handleClearAllMeals}>
         <View style={styles.clearButtonContainer}>
           <Text style={styles.clearButton}>Clear All</Text>
